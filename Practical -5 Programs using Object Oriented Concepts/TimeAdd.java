@@ -31,8 +31,8 @@ class Time {
         }
         result.hour += t.hour;
         if (result.hour >= 24) {
-            result.days += result.minutes / 24;
-            result.minutes %= 24;
+            result.days += result.days / 24;
+            result.days %= 24;
         }
         result.days += t.days;
         return result;
