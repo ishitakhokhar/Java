@@ -40,8 +40,7 @@ public class AnimalArray {
         };
         for (Animal animal : animals) {
             if (animal instanceof Transport){
-
-            }
+                ((Transport)animal).deliver();            }
         }
     }
 }
