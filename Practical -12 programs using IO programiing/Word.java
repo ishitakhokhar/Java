@@ -10,29 +10,37 @@ import java.io.IOException;
 public class Word {
 
     public static void main(String[] args) {
-        String Name = "Name.txt";
-        String Name2 = "Name2.txt";
-        String word1 = "word1";
+        String name = "Name.txt";
+        String name2 = "Name2.txt";
+        String word1 = "Word1";
         String word2 = "word2";
-        try {
-            FileReader fileReader = new FileReader(Name);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-
-            FileWriter fileWriter = new FileWriter(Name2);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        int replacements = 0;
+        try (FileReader fileReader = new FileReader(name);
+                BufferedReader bufferedReader = new BufferedReader(fileReader);
+                FileWriter fileWriter = new FileWriter(name2);
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
 
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                line = line.replace("Word1", "word2");
+                int count = countReplacements(line, word1);
+                line = line.replaceAll(word1, word2);
+                replacements += countReplacements(line, word2);
                 bufferedWriter.write(line);
                 bufferedWriter.newLine();
             }
-            bufferedWriter.close();
-            bufferedReader.close();
-
+            System.out.println("Number of replacements : " + replacements);
         } catch (IOException e) {
             System.err.println("Error : " + e.getMessage());
-            System.err.println("Not found");
         }
+    }
+
+    private static int countReplacements(String line, String word2) {
+        int count = 0;
+        int index = line.indexOf(word2);
+        while (index != -1) {
+            count++;
+            index = line.indexOf(word2, index + 1);
+        }
+        return count;
     }
 }
