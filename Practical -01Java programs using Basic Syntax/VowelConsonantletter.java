@@ -3,7 +3,7 @@
 //or constant.
 import java.util.Scanner;
 
-public class VowelCons {
+public class VowelConsanLetter {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter Letter : ");
